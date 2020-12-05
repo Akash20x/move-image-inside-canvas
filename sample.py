@@ -8,15 +8,13 @@ root.resizable(False,False)
 
 def drag_start(event):
     widget = event.widget
-    widget.startX = event.x
-    widget.startY = event.y
+    widget.startX,widget.startY = event.x,event.y
 
 def mov(event):
     widget = event.widget
-    x = widget.winfo_x() - widget.startX + event.x
-    y = widget.winfo_y() - widget.startY + event.y
-    canvas.move(obj,x,y)
-    canvas.update()
+    widget.move(obj,event.x-widget.startX,event.y-widget.startY)
+    widget.startX,widget.startY = event.x,event.y
+
 
 canvas=Canvas(root,width=800,height=600,bg="red")
 canvas.pack(fill=BOTH,expand=1)
